@@ -10,7 +10,7 @@ $(document).ready(function () {
     we remove the item from the dom. If the user removes all the
     items, they can easily add more by clicking the button.
 */
-const INITIAL_ITEMS = 4;
+const INITIAL_ITEMS = 3;
 let i;  // incremented value used to create id tags for item fields
 
 function removeItemField(identifier) {
@@ -21,7 +21,7 @@ function templateItemField(i) {
     var identifier = 'item-'+i
     return `
     <div class="input-group mb-3" id="${identifier}">
-        <input type="text" class="form-control" placeholder="Enter your task, option, or whatever else you need help deciding">
+        <input type="text" class="form-control" placeholder="">
         <div class="input-group-append">
             <button onclick="removeItemField('#${identifier}')" class="btn btn-outline-danger" type="button">&cross;</button>
         </div>
@@ -48,21 +48,63 @@ $('#btnAdd').on('click', function() {
 */
 function getArrayOfFieldValues() {
     var inputValues = $('#theItems div input').map(function () {
-        // returns an array of values, may be empty or contain empty strings
         return $(this).val();
     }).get();
     var filteredArray = inputValues.filter(function(e) {
         return e;
     });
-    if (filteredArray.length < 2) {
-        return alert('Try adding some more items, you need at least 2');
-    } else {
-        // Launch the modal window and prompt the user for input, recording it.
-
-    };
-}
+    return filteredArray;
+};
 
 $('#btnStart').on('click', function() {
-    var theValues = getArrayOfFieldValues();
-    console.log(theValues);
+    var theArray = getArrayOfFieldValues();
+    if (theArray.length < 2) {
+        return alert('Try adding some more items, you need at least 2');
+    }
+    // turn filtered array into an object for tallies (added benefit of dropping dupe keys)
+    var results = initializeResults(theArray);
+    console.log(results);
+    // create a list of [A, B] options (list of lists)
+    var pairs = createComparisonPairs(results);
+    console.log(pairs);
+    // loop thru the pairs, populating modal window and storing results
+    for (var i=0; i<pairs.length; i++) {
+        // populate the modal and prepare to receive user answer
+        console.log('Showing modal #'+i);
+        $('#theModal').modal('show');   // we have manually given the id of `theModal`, this is not magic
+        // capture the selection & update result object
+    }
+    // sort results and display to the user
 });
+
+/*
+    This is the actual comparison logic. The formula for number of
+    comparisons that must occur with an N-numbered set of criteria is
+    >>> N(N-1) / 2
+    N  |  Compares
+    --------------
+    2  |    1
+    3  |    3
+    4  |    6
+    5  |    10
+    6  |    15
+*/
+function initializeResults(array) {
+    var results = {};
+    for (var i=0; i<array.length; i++) {
+        results[array[i]] = 0;
+    }
+    return results;
+};
+
+function createComparisonPairs(results) {
+    // Operate on the object keys in case array contains duplicates
+    var pairs = new Array();
+    var keys = Object.keys(results);
+    for (var i=0; i<keys.length-1; i++) {
+        for (var j=i+1; j<keys.length; j++) {
+            pairs.push([ keys[i], keys[j] ]);
+        }
+    }
+    return pairs;
+}

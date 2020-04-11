@@ -1,6 +1,7 @@
 /* style.css */
 :root {
     --footer-height: 40px;
+    --app-width: 70%;
 }
 html {
     position: relative;
@@ -21,10 +22,23 @@ body {
     font-size: small;
 }
 #app {
-    max-width: 60%;
+    max-width: var(--app-width);
     min-height: calc(100vh - var(--footer-height));
     border-bottom: 1px solid #ccc;
 }
 .jumbotron {
     padding: 1rem 1rem;
+}
+
+/* BOOTSTRAP OVERRIDES */
+.card-group {
+    /* margin: TOP RIGHT BOTTOM LEFT */
+    margin: 20px 0px 20px 0px;
+    padding: 0px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.card-footer {
+    border-top: none;
+    background-color: transparent;
 }

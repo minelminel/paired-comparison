@@ -41,11 +41,50 @@ $('#btnAdd').on('click', function() {
     i++;
 });
 
+
+function recordAndRemove(id, choice) {
+    console.log('Recording selection: '+choice);
+    results[choice]++;
+    console.log('Removing id='+id);
+    $('#'+id).remove();
+    // if we removed the last set of choices, show the results
+    if ($('#theChoices').children().toArray().length === 0) {
+        console.log('Displaying the results');
+        $('#theResults').text(JSON.stringify(results));
+    }
+}
+
+function templateChoiceField(i, optionA, optionB) {
+    var choiceId = 'choice-'+i
+    return `
+    <div class="card-group" id="${choiceId}">
+        <div class="card">
+            <div class="card-body text-center">
+                <p class="card-text">${optionA}</p>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-outline-info btn-block btn-sm" onclick="recordAndRemove('${choiceId}', '${optionA}')">Select</button>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body text-center">
+                <p class="card-text">${optionB}</p>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-outline-info btn-block btn-sm" onclick="recordAndRemove('${choiceId}', '${optionB}')">Select</button>
+            </div>
+        </div>
+    </div>
+    `;
+}
+
 /*
     This is the manner in which we select all of the input fields.
     If an input field is empty, we omit it. Pass the array of values
     to the function which populates the modal window and records results.
 */
+let results;
+
 function getArrayOfFieldValues() {
     var inputValues = $('#theItems div input').map(function () {
         return $(this).val();
@@ -57,22 +96,24 @@ function getArrayOfFieldValues() {
 };
 
 $('#btnStart').on('click', function() {
+    // Remove any previous results
+    $('#theResults').text('');
     var theArray = getArrayOfFieldValues();
     if (theArray.length < 2) {
         return alert('Try adding some more items, you need at least 2');
     }
     // turn filtered array into an object for tallies (added benefit of dropping dupe keys)
-    var results = initializeResults(theArray);
+    results = initializeResults(theArray);
     console.log(results);
     // create a list of [A, B] options (list of lists)
     var pairs = createComparisonPairs(results);
     console.log(pairs);
     // loop thru the pairs, populating modal window and storing results
     for (var i=0; i<pairs.length; i++) {
-        // populate the modal and prepare to receive user answer
-        console.log('Showing modal #'+i);
-        $('#theModal').modal('show');   // we have manually given the id of `theModal`, this is not magic
-        // capture the selection & update result object
+        // populate the choices and prepare to receive user answer.
+        // when the user makes a selection, record the answer and remove that list item.
+        console.log('Appending choice set #'+i);
+        $('#theChoices').append(templateChoiceField(i, pairs[i][0], pairs[i][1]));
     }
     // sort results and display to the user
 });

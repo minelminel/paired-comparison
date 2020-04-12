@@ -1,7 +1,7 @@
 # paired-comparison
 
 <p style="text-align: center;">
-[![Deployed](https://img.shields.io/badge/deployment-heroku-blueviolet)](https://paired-comparison.herokuapp.com/)
+[![Deployed](https://img.shields.io/badge/deployed-heroku-blueviolet)](https://paired-comparison.herokuapp.com/)
 </p>
 
 ### Heroku

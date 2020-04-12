@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: paired-comparison-deployment
+  labels:
+    app: paired-comparison
+spec:
+  selector:
+    matchLabels:
+      app: paired-comparison
+  template:
+    metadata:
+      labels:
+        app: paired-comparison
+    spec:
+      containers:
+      - name: paired-comparison
+        image: localhost:32000/minelminel/paired-comparison:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80

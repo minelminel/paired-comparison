@@ -24,7 +24,7 @@ function templateItemField(i) {
     <div class="input-group mb-3" id="${identifier}">
         <input type="text" class="form-control" placeholder="">
         <div class="input-group-append">
-            <button onclick="removeItemField('#${identifier}')" class="btn btn-outline-danger" type="button">&cross;</button>
+            <button onclick="removeItemField('#${identifier}')" class="btn btn-danger" type="button">&cross;</button>
         </div>
     </div>`;
 }
@@ -108,7 +108,7 @@ function templateChoiceField(i, optionA, optionB) {
                 <p class="card-text">${optionA}</p>
             </div>
             <div class="card-footer">
-                <button class="btn btn-outline-info btn-block btn-sm" onclick="recordAndRemove('${choiceId}', '${optionA}')">Select</button>
+                <button class="btn btn-info btn-block btn-sm" onclick="recordAndRemove('${choiceId}', '${optionA}')">Select</button>
             </div>
         </div>
         <div class="card">
@@ -116,7 +116,7 @@ function templateChoiceField(i, optionA, optionB) {
                 <p class="card-text">${optionB}</p>
             </div>
             <div class="card-footer">
-                <button class="btn btn-outline-info btn-block btn-sm" onclick="recordAndRemove('${choiceId}', '${optionB}')">Select</button>
+                <button class="btn btn-info btn-block btn-sm" onclick="recordAndRemove('${choiceId}', '${optionB}')">Select</button>
             </div>
         </div>
     </div>

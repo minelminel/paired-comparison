@@ -1,32 +1,16 @@
 /* style.css */
 :root {
     --footer-height: 40px;
-    /* --app-width: 70%; */
 }
 /* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) {
-    :root {
-        --app-width: 100%;
-    }
-}
+@media (min-width: 576px) { :root { --app-width: 100%; } }
 /* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {
-    :root {
-        --app-width: 90%;
-    }
-}
+@media (min-width: 768px) { :root { --app-width: 90%; } }
 /* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-    :root {
-        --app-width: 80%;
-    }
-}
+@media (min-width: 992px) { :root { --app-width: 80%; } }
 /* Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-    :root {
-        --app-width: 70%;
-    }
-}
+@media (min-width: 1200px) { :root { --app-width: 70%; } }
+/* MAIN STYLES */
 html {
     position: relative;
     min-height: 100%;
@@ -57,7 +41,7 @@ body {
 /* BOOTSTRAP OVERRIDES */
 .card-group {
     /* margin: TOP RIGHT BOTTOM LEFT */
-    margin: 20px 0px 20px 0px;
+    margin: 40px 0px 20px 0px;
     padding: 0px;
     border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -65,6 +49,9 @@ body {
 .card-footer {
     border-top: none;
     background-color: transparent;
+}
+.card-body {
+    min-height: 120px;
 }
 
 /* HIGHCHARTS */

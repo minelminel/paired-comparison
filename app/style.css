@@ -1,7 +1,31 @@
 /* style.css */
 :root {
     --footer-height: 40px;
-    --app-width: 70%;
+    /* --app-width: 70%; */
+}
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    :root {
+        --app-width: 100%;
+    }
+}
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    :root {
+        --app-width: 90%;
+    }
+}
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    :root {
+        --app-width: 80%;
+    }
+}
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    :root {
+        --app-width: 70%;
+    }
 }
 html {
     position: relative;
@@ -42,17 +66,16 @@ body {
     border-top: none;
     background-color: transparent;
 }
+
 /* HIGHCHARTS */
 .highcharts-figure, .highcharts-data-table table {
     min-width: 320px; 
     max-width: 500px;
     margin: 1em auto;
 }
-
 #container {
     height: 400px;
 }
-
 .highcharts-data-table table {
 	font-family: Verdana, sans-serif;
 	border-collapse: collapse;

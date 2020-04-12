@@ -1,4 +1,4 @@
-const APP_VERSION = '0.0.1';
+const APP_VERSION = '0.0.2';
 $(document).ready(function () {
     $('#appVersion').text('Version: ' + APP_VERSION);
 });
@@ -153,10 +153,13 @@ $('#btnStart').on('click', function() {
     // create a list of [A, B] options (list of lists)
     var pairs = createComparisonPairs(results);
     // loop thru the pairs, populating modal window and storing results
+    // shuffle the pairs before looping as to not bias by input order
+    shuffle(pairs);
     for (var i=0; i<pairs.length; i++) {
         // populate the choices and template the logic for recording responses
         // when the user makes a selection, record the answer and remove that list item.
-        $('#theChoices').append(templateChoiceField(i, pairs[i][0], pairs[i][1]));
+        var shuffledPair = shuffle(pairs[i])
+        $('#theChoices').append(templateChoiceField(i, shuffledPair[0], shuffledPair[1]));
     }
 });
 
@@ -190,4 +193,16 @@ function createComparisonPairs(results) {
         }
     }
     return pairs;
+}
+
+/**
+ * Shuffles array in place. ES6 version
+ * @param {Array} a items An array containing the items.
+ */
+function shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
 }

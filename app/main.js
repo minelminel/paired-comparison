@@ -12,6 +12,7 @@ $(document).ready(function () {
 */
 const INITIAL_ITEMS = 3;
 let i;  // incremented value used to create id tags for item fields
+const Highcharts = window.Highcharts;
 
 function removeItemField(identifier) {
     $(identifier).remove();
@@ -41,16 +42,60 @@ $('#btnAdd').on('click', function() {
     i++;
 });
 
-
 function recordAndRemove(id, choice) {
-    console.log('Recording selection: '+choice);
     results[choice]++;
-    console.log('Removing id='+id);
     $('#'+id).remove();
     // if we removed the last set of choices, show the results
     if ($('#theChoices').children().toArray().length === 0) {
-        console.log('Displaying the results');
-        $('#theResults').text(JSON.stringify(results));
+        // convert our results object into something more usable
+        var data = new Array();
+        var keys = Object.keys(results);
+        for (var k=0; k<keys.length; k++) {
+            data.push([ keys[k], results[keys[k]] ]);
+        }
+        Highcharts.chart('theResults', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: 0,
+                plotShadow: false
+            },
+            title: {
+                text: 'Results',
+                align: 'center',
+                verticalAlign: 'middle',
+                y: 60
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            accessibility: {
+                point: {
+                    valueSuffix: '%'
+                }
+            },
+            plotOptions: {
+                pie: {
+                    dataLabels: {
+                        enabled: true,
+                        distance: -50,
+                        style: {
+                            fontWeight: 'bold',
+                            color: 'white'
+                        }
+                    },
+                    startAngle: -90,
+                    endAngle: 90,
+                    center: ['50%', '75%'],
+                    size: '110%'
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Results',
+                innerSize: '50%',
+                data: data,
+            }]
+        });
     }
 }
 
@@ -96,26 +141,23 @@ function getArrayOfFieldValues() {
 };
 
 $('#btnStart').on('click', function() {
-    // Remove any previous results
+    // Remove any previous content
     $('#theResults').text('');
+    $('#theChoices').children().remove();
     var theArray = getArrayOfFieldValues();
     if (theArray.length < 2) {
         return alert('Try adding some more items, you need at least 2');
     }
     // turn filtered array into an object for tallies (added benefit of dropping dupe keys)
     results = initializeResults(theArray);
-    console.log(results);
     // create a list of [A, B] options (list of lists)
     var pairs = createComparisonPairs(results);
-    console.log(pairs);
     // loop thru the pairs, populating modal window and storing results
     for (var i=0; i<pairs.length; i++) {
-        // populate the choices and prepare to receive user answer.
+        // populate the choices and template the logic for recording responses
         // when the user makes a selection, record the answer and remove that list item.
-        console.log('Appending choice set #'+i);
         $('#theChoices').append(templateChoiceField(i, pairs[i][0], pairs[i][1]));
     }
-    // sort results and display to the user
 });
 
 /*

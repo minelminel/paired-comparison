@@ -1,6 +1,8 @@
 # paired-comparison
 
-[![Heroku](https://heroku-badge.herokuapp.com/?app=paired-comparison)]
+<p style="text-align: center;">
+[![Deployed](https://img.shields.io/badge/deployment-heroku-blueviolet)](https://paired-comparison.herokuapp.com/)
+</p>
 
 ### Heroku
 ```bash

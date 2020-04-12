@@ -1,6 +1,6 @@
 # paired-comparison
 
-[![Deployed](https://img.shields.io/badge/deployed-heroku-blueviolet)](https://paired-comparison.herokuapp.com/)]
+[![Deployed](https://img.shields.io/badge/deployed-heroku-blueviolet)](https://paired-comparison.herokuapp.com/)
 
 ### Heroku
 ```bash

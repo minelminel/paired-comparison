@@ -8,7 +8,7 @@ $(document).ready(function () {
     to a function should be declared here so we can be sure not to overwrite.
 */
 const Highcharts = window.Highcharts;
-const INITIAL_ITEMS = 3;
+const INITIAL_ITEMS = 5;
 const FADE_TIME = 300;
 let i;  // incremented value used to create id tags for item fields
 let results;    // object used to record user selections & display them

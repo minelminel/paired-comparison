@@ -161,49 +161,48 @@ function displayResultsChart(results) {
     var data = new Array();
     var keys = Object.keys(results);
     for (var k=0; k<keys.length; k++) {
-        data.push([ keys[k], results[keys[k]] ]);
+        data.push(results[keys[k]]);
     }
     Highcharts.chart('theResults', {
         chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: 0,
-            plotShadow: false
+            type: 'bar'
         },
         title: {
-            text: 'Results',
-            align: 'center',
-            verticalAlign: 'middle',
-            y: 60
+            text: 'Results'
+        },
+        xAxis: {
+            categories: keys,
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Votes',
+                align: 'high'
+            },
+            labels: {
+                overflow: 'justify'
+            }
         },
         tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-        accessibility: {
-            point: {
-                valueSuffix: '%'
-            }
+            valueSuffix: ' votes'
         },
         plotOptions: {
-            pie: {
+            bar: {
                 dataLabels: {
-                    enabled: true,
-                    distance: -50,
-                    style: {
-                        fontWeight: 'bold',
-                        color: 'white'
-                    }
-                },
-                startAngle: -90,
-                endAngle: 90,
-                center: ['50%', '75%'],
-                size: '110%'
+                    enabled: false
+                }
             }
         },
+        credits: {
+            enabled: false
+        },
         series: [{
-            type: 'pie',
-            name: 'Results',
-            innerSize: '50%',
+            name: '',
             data: data,
+            showInLegend: false
         }]
     });
 }

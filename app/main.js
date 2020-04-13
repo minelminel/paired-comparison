@@ -31,7 +31,7 @@ function templateItemField(i) {
 function templateChoiceField(i, optionA, optionB) {
     var choiceId = 'choice-'+i
     return `
-    <div class="card-group" id="${choiceId}">
+    <div class="card-group" id="${choiceId}" style="visibility: hidden">
         <div class="card">
             <div class="card-body text-center d-flex align-items-stretch">
                 <button class="btn btn-outline-dark btn-block btn-lg" onclick="recordAndRemove('${choiceId}', '${optionA}')">${optionA}</button>
@@ -91,7 +91,11 @@ function recordAndRemove(id, choice) {
         $(this).remove();
         // if we removed the last set of choices, show the results
         if ($('#theChoices').children().toArray().length === 0) {
+            console.log('No more selections to make, showing results');
             displayResultsChart(results);
+        } else {
+            // make the next pair of choices visible
+            $('#theChoices').children(":first-child").css('visibility', 'visible')
         }
     });
 }
@@ -142,8 +146,9 @@ $('#btnStart').on('click', function() {
         // populate the choices and template the logic for recording responses
         var shuffledPair = shuffle(pairs[i])
         $('#theChoices').append(templateChoiceField(i, shuffledPair[0], shuffledPair[1]));
-        // when the user makes a selection, record the answer and remove that list item.
     }
+    // make the first pair of choices visible, since we templated them as hidden
+    $('#theChoices').children(":first-child").css('visibility', 'visible')
 });
 
 /*

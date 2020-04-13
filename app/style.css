@@ -37,8 +37,14 @@ body {
 .jumbotron {
     padding: 1rem 1rem;
 }
+.button-row {
+    padding-bottom: 20px;
+}
 
 /* BOOTSTRAP OVERRIDES */
+.input-group input {
+    background-color: #fcfcfc;
+}
 .card-group {
     /* margin: TOP RIGHT BOTTOM LEFT */
     margin: 40px 0px 40px 0px;

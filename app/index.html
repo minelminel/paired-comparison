@@ -15,14 +15,69 @@
     <main>
         <!-- BEGIN MAIN CONTENT -->
         <div class="container" id="app">
-
+            <!-- JUMBOTRON HEADER -->
             <div class="jumbotron">
                 <div class="container">
                     <h1 class="display-4">Paired Comparison</h1>
-                    <p class="lead">A straightforward method of performing subjective rankings.</p>
+                    <div class="container" style="display: flex; justify-content: space-between;">
+                        <div class="box" style="flex: 11;">
+                            <p class="lead">A straightforward method of performing subjective rankings.</p>
+                        </div>
+                        <div class="box" style="flex: 1; text-align: right;">
+                            <p class="lead">
+                                <!-- SHOW THE INSTRUCTION MODAL WINDOW -->
+                                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#helpModal">
+                                    <img src="help.png" alt="help" width="32px">
+                                  </button>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        
+            <!-- MODAL INSTRUCTION POPUP -->
+            <div class="container">
+                <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="helpModalLabel">Instructions</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                Enter the list of choices you are looking to rank into the text boxes, one
+                                choice per box. You can keep adding more boxes by clicking the blue "Add Another" button.
+                                To delete an item, click the red "X" on the right-hand side of the field. Once you 
+                                have entered all your choices, click the green "Start Comparison" button.
+                            </p>
+                            <p>
+                                You will see a pair of choices displayed at the bottom of the page. 
+                                For each side-by-side set of options, click the button corresponding your choice. 
+                                After you click a button that row will disappear, so choose carefully! 
+                                Once all selections have been made, your results will automatically be displayed. 
+                                You may restart the selection process by clicking "Start Comparison" again, but note
+                                that any selections you have made already will be forgotten.
+                            </p>
+                            <p>
+                                Once the results have been displayed, you may interact with the chart using your mouse 
+                                or your finger if you are on a mobile device. This will allow you to see detailed information 
+                                regarding each of the choices.
+                            </p>
+                            <p>
+                                If at any point you wish to start over or reset the page, clicking your browser's 
+                                Refresh button will reload the page in a clean state.
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>        
+            <!-- INPUT FIELDS -->
             <div class="container">
                 <div id="theItems">
                     <!-- DYNAMICALLY POPULATED BY JS -->
@@ -34,20 +89,8 @@
                     </div>
                 </div>
             </div>
-
+            <!-- COMPARISONS & RESULTS -->
             <div class="container" style="margin-top: 20px;">
-
-                <div hidden>
-                    <h5>Instructions</h5>
-                    <p>
-                        For each side-by-side set of options, click the "Select" button corresponding your choice. 
-                        After you click a button that row will disappear, so make choose carefully! 
-                        Once all selections have been made, your results will automatically be displayed. 
-                        You may restart the selection process by clicking "Start Comparison" again, but note
-                        that any selections you have made already will be forgotten.
-                    </p>
-                </div>
-
                 <div id="theChoices">
                     <!-- THIS IS WHERE WE INSERT THE LIST OF CHOICES ON SUBMIT -->
                 </div>
@@ -56,7 +99,6 @@
                     <!-- THIS IS WHERE WE DISPLAY THE TALLIED RESULTS -->
                 </div>
             </div>
-
         </div>
         <!-- END MAIN CONTENT -->
     </main>
@@ -84,5 +126,4 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
-
 </html>

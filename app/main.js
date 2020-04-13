@@ -1,4 +1,4 @@
-const APP_VERSION = '0.0.2';
+const APP_VERSION = '0.0.3';
 $(document).ready(function () {
     $('#appVersion').text('Version: ' + APP_VERSION);
 });
@@ -8,7 +8,7 @@ $(document).ready(function () {
     to a function should be declared here so we can be sure not to overwrite.
 */
 const Highcharts = window.Highcharts;
-const INITIAL_ITEMS = 5;
+const INITIAL_ITEMS = 4;
 const FADE_TIME = 300;
 let i;  // incremented value used to create id tags for item fields
 let results;    // object used to record user selections & display them
@@ -31,7 +31,7 @@ function templateItemField(i) {
 function templateChoiceField(i, optionA, optionB) {
     var choiceId = 'choice-'+i
     return `
-    <div class="card-group" id="${choiceId}" style="visibility: hidden">
+    <div class="card-group" id="${choiceId}" style="display: none">
         <div class="card">
             <div class="card-body text-center d-flex align-items-stretch">
                 <button class="btn btn-outline-dark btn-block btn-lg" onclick="recordAndRemove('${choiceId}', '${optionA}')">${optionA}</button>
@@ -95,7 +95,7 @@ function recordAndRemove(id, choice) {
             displayResultsChart(results);
         } else {
             // make the next pair of choices visible
-            $('#theChoices').children(":first-child").css('visibility', 'visible')
+            $('#theChoices').children(":first-child").css('display', 'block')
         }
     });
 }
@@ -148,7 +148,7 @@ $('#btnStart').on('click', function() {
         $('#theChoices').append(templateChoiceField(i, shuffledPair[0], shuffledPair[1]));
     }
     // make the first pair of choices visible, since we templated them as hidden
-    $('#theChoices').children(":first-child").css('visibility', 'visible')
+    $('#theChoices').children(":first-child").css('display', 'block')
 });
 
 /*

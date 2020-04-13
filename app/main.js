@@ -95,7 +95,7 @@ function recordAndRemove(id, choice) {
             displayResultsChart(results);
         } else {
             // make the next pair of choices visible
-            $('#theChoices').children(":first-child").css('display', 'block')
+            $('#theChoices').children(":first-child").css('display', 'flex')
         }
     });
 }
@@ -128,6 +128,8 @@ $('#btnAdd').on('click', function() {
 });
 
 $('#btnStart').on('click', function() {
+    // Scroll to the top of the page
+    $("html, body").animate({ scrollTop: 0 }, "slow");
     // Remove any previous content
     $('#theResults').text('');
     $('#theChoices').children().remove();
@@ -148,7 +150,7 @@ $('#btnStart').on('click', function() {
         $('#theChoices').append(templateChoiceField(i, shuffledPair[0], shuffledPair[1]));
     }
     // make the first pair of choices visible, since we templated them as hidden
-    $('#theChoices').children(":first-child").css('display', 'block')
+    $('#theChoices').children(":first-child").css('display', 'flex')
 });
 
 /*
